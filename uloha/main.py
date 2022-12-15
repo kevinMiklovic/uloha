@@ -2,6 +2,11 @@ from matica import *
 from zlomky import *
 from vektory import *
 from simplexMethod import *
+from simplexKomplet import *
+
+from simplexOptiMiklovic import *
+from maticaNaZlomok import *
+from simplexkaMetody import *
 
 print('---------------------------------------------------------')
 print('--------- LINEARNA OPTIMALIZACIA --------- KEVIN MIKLOVIC')
