@@ -35,8 +35,8 @@ pocetStlpcov = len(tabulkaStred[0])
 
 print("\n////////////////////////////////////////////////////////////")
 print("-------------------- ZACIATOK PROGRAMU --------------------")
-print("////////////////////     miklovic      /////////////////////")
-print("////////////////////      kevin        /////////////////////")
+print("////////////////////  miklovic kevin   /////////////////////")
+print("////////////////////  optimalizacia    /////////////////////")
 if (pocetPomocnych_U > 0):
     vynulovane = 0
     # zistenie kolko mame pomocnych a kolko riadkov ideme spocitavat '1'
@@ -60,8 +60,6 @@ if (pocetPomocnych_U > 0):
             #prva hodnota je po deleni bazy..  DRUHA je riadok pivota
             poziciaPivotaRiadok = vyberPivota(tabulkaStredZlomkova, poziciaNajMinusovehoStlpecPivot, pocetRiadkov)
             print("\nNas pivot je: "+str(tabulkaStredZlomkova[poziciaPivotaRiadok][poziciaNajMinusovehoStlpecPivot]) + " a jeho pozicia riadka je: " + str(poziciaPivotaRiadok))
-            print(poziciaPivotaRiadok)
-            print(poziciaNajMinusovehoStlpecPivot)
             bazaTabulka[poziciaPivotaRiadok] = tabulkaStredNazvy[poziciaNajMinusovehoStlpecPivot+1]
             #vydelenie pivotoveho riadku pivotom
             tabulkaStredZlomkova = vydelPivotom(tabulkaStredZlomkova, poziciaPivotaRiadok, poziciaNajMinusovehoStlpecPivot)
@@ -94,9 +92,9 @@ if (pocetPomocnych_U > 0):
                     print("Všetky neznáme pre cenovu funkciu: "+str(tabulkaStredNazvy))
                     print("Neznáme v BÁZE: " + str(bazaTabulka))
                     vypisVysledku(tabulkaStredZlomkova, tabulkaStredNazvy)
-                    print("\n//////////////////////////////////////////////////////")
-                    print("//////////////   KONIEC PROGRAMU   ///////////////////")
-                    print("//////////////////////////////////////////////////////")
+                    print("\n//////////////////////////////////////////////////////////////////////////////////////////////////////////////////")
+                    print("//////////////   KONIEC PROGRAMU   ///////////////////////////////////////////////////////////////////////////////")
+                    print("//////////////////////////////////////////////////////////////////////////////////////////////////////////////////")
                     sys.exit()
                 poz = zistenieZapornejSumy(tabulkaStredZlomkova)
                 pozPivotaRiadok = hladajPivota(tabulkaStredZlomkova, poz)
@@ -108,8 +106,8 @@ if (pocetPomocnych_U > 0):
                 tabulkaStredZlomkova = gaussEliminacnaMetoda(tabulkaStredZlomkova, pozPivotaRiadok, poz, pocetStlpcov)
                 tabulkaStredZlomkova = GCD(tabulkaStredZlomkova, pocetRiadkov, pocetStlpcov)
                 vypisDefaultSimplex(tabulkaStredZlomkova)
-                print("//////////////////////////////// '♦' ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////")
-
+                print(
+                    "********************************************************** '♦' **********************************************************")
 elif (pocetPomocnych_U == 0):
     tabulkaStredZlomkova = spravZlomkovu(tabulkaStred)
     vypisDefaultSimplex(tabulkaStredZlomkova)
@@ -118,10 +116,13 @@ elif (pocetPomocnych_U == 0):
         a = ukoncenie(tabulkaStredZlomkova, pocetStlpcov, pocetRiadkov)
         if a == '0':
             tabulkaStredZlomkova = GCD(tabulkaStredZlomkova, pocetRiadkov, pocetStlpcov)
-            print(bazaTabulka)
-            print("\n//////////////////////////////////////////////////////")
-            print("//////////////   KONIEC PROGRAMU   ///////////////////")
-            print("//////////////////////////////////////////////////////")
+            print()
+            print("Všetky neznáme pre cenovu funkciu: " + str(tabulkaStredNazvy))
+            print("Neznáme v BÁZE: " + str(bazaTabulka))
+            vypisVysledku(tabulkaStredZlomkova, tabulkaStredNazvy)
+            print("\n//////////////////////////////////////////////////////////////////////////////////////////////////////////////////")
+            print("//////////////   KONIEC PROGRAMU   ///////////////////////////////////////////////////////////////////////////////")
+            print("//////////////////////////////////////////////////////////////////////////////////////////////////////////////////")
             sys.exit()
         poz = zistenieZapornejSumy(tabulkaStredZlomkova)
         pozPivotaRiadok = hladajPivota(tabulkaStredZlomkova, poz)
@@ -135,6 +136,6 @@ elif (pocetPomocnych_U == 0):
         tabulkaStredZlomkova = gaussEliminacnaMetoda(tabulkaStredZlomkova, pozPivotaRiadok, poz, pocetStlpcov)
         tabulkaStredZlomkova = GCD(tabulkaStredZlomkova, pocetRiadkov, pocetStlpcov)
         vypisDefaultSimplex(tabulkaStredZlomkova)
-        print("//////////////////////////////// '♦' ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////")
+        print("********************************************************** '♦' **********************************************************")
 
 

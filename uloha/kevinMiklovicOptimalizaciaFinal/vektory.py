@@ -18,7 +18,7 @@ def vytvorenieVektora(b):
 ######********************************************************************
 def vypisVektora(vVysledok, v1, v2, a):
 
-    print(str(a), str(v1) + "\n" + str(v2) + "\n" + str(vVysledok))
+    print(str(a) + str(v1) + "\n" + str(v2) + "\nVYSLEDNY VEKTOR\n" + str(vVysledok))
     #for i in range(0, len(vektor)):
     #    print(str(a) + "prva hodnota v intervale: " + str(vektor[i]))
 

@@ -1,12 +1,6 @@
 from matica import *
 from zlomky import *
 from vektory import *
-from simplexMethod import *
-from simplexKomplet import *
-
-from simplexOptiMiklovic import *
-from maticaNaZlomok import *
-from simplexkaMetody import *
 
 print('---------------------------------------------------------')
 print('--------- LINEARNA OPTIMALIZACIA --------- KEVIN MIKLOVIC')
@@ -16,7 +10,7 @@ matica1 = []
 matica2 = []
 
 while True:
-    print('*** MENU ***\n 1 - Matice\n 2 - Zlomky\n 3 - Vektory\n 4 - Simplex')
+    print('*** MENU ***\n 1 - Matice\n 2 - Zlomky\n 3 - Vektory\n')
     operacia = input("Vyber si z moznosti: #-")
     if operacia.isdigit():
         operacia = int(operacia)
@@ -44,19 +38,15 @@ while True:
                 elif operaciaMatic == "3" and len(matica1[0] == len(matica2)):
                     vysledok = sucinMatice(matica1, matica2)
                     vypisMatice(vysledok, "☻☻☻☻☻☻ A * B")
-                elif operaciaMatic == "4":
-                    break
                 else:
                     print("Pre scitanie a odcitanie matic je potrebne aby boli takej istej velkosti!!!\npre nasobenie je potrebne aby pocet riadkov prvej matice sa zhodoval s poctom stlpvoc v druhej")
-
-
 
         elif operacia == 2:
             print("Vytvorenie zlomkov!")
             zlomok1 = vytvorZlomok()
             zlomok2 = vytvorZlomok()
-
-            print(zlomok1)
+            print("Zlomok 1 - "+str(zlomok1))
+            print("Zlomok 2 - "+str(zlomok2))
             while True:
                 print("\n*** MENU - Zlomky *** 1 - Spocitanie | 2 - Odcitanie | 3 - Nasobenie | 4 - Delenie | 5 - Naspäť'")
                 operaciaZlomky = input("Co sa ma stat?: #-")
@@ -74,8 +64,6 @@ while True:
                     vypisZlomku(vysledokZlomky)
                 elif operaciaZlomky == "5":
                     break
-
-
 
         elif operacia == 3:
             print("Vytvorenie vektorov")
@@ -97,12 +85,6 @@ while True:
                     break
                 else:
                     print("vektory nemaju rovnaku dlžku!!!")
-
-        elif operacia == 4:
-            print("▬▬▬▬ SIMPLEXOVA METODA ▬▬▬▬")
-            simlexM()
-        else:
-            print("Zadaj prosim spravnu hodnotu!\n")
     else:
         print("Zadaj prosim spravnu hodnotu!\n")
 
