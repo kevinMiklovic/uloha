@@ -1,3 +1,18 @@
+import sys
+
+
+def hladanieNulovehoriadkuW(wTabulka, pocetStlpcov, pocetPomocnychU):
+    a = 1
+    pocetStlpcov = pocetStlpcov - pocetPomocnychU
+    print(pocetStlpcov)
+    for i in range(1, pocetStlpcov):
+        if wTabulka[0][i][0] == 0:
+            a = a + 1
+    if a == pocetStlpcov:
+        print("CELY VEKTOR JE NULOVY!!!!!!!!!!!!")
+        return 'koniec'
+    else:
+        print("Vektor je v poriadku - nie je NENULOVY")
 def vytvorW(tabulkaDefault, wTabulka, pocet_U, pomocnePrePocetRiadkov):
     riadok = 0
     if pocet_U > 0:
@@ -17,7 +32,7 @@ def zistiKolkoRiadkovPre_W(tabulka, pocet_P, pocet_U, pocet_Stlpcov, pocet_Riadk
             if (tabulka[i][j] == 1):
                 akyRiadokSpocitat[0][i] = 1
     return akyRiadokSpocitat
-def zistiNajvacsieZaporneCislo(wTabulka, poc_stlpcov):
+def zistiNajvacsieZaporneCislo(wTabulka, poc_stlpcov, pocetU):
     najmensieCislo = 1000
     for i in range(1, poc_stlpcov):
         pomocna = wTabulka[0][i][0] / wTabulka[0][i][1]
@@ -48,8 +63,8 @@ def gaussMetodForW(tabulka, wTabulka, pivotRiadok, pivotStlpec, pocetStlpcov):
         else:
             """print("//////////// pocitame //////////////")
             print("hodnoty z tabulky a nasobenie pivotom - "+ str(tabulka[pivotRiadok][i][0]) +" * "+ str(ulozPivotaCitatel))
-            print("hodnoty z tabulky a nasobenie pivotom - " + str(tabulka[pivotRiadok][i][1]) + " * " + str(ulozPivotaCitatel))
-            """
+            print("hodnoty z tabulky a nasobenie pivotom - " + str(tabulka[pivotRiadok][i][1]) + " * " + str(ulozPivotaCitatel))"""
+
             tempCitatel = tabulka[pivotRiadok][i][0] * ulozPivotaCitatel
             tempMenoval = tabulka[pivotRiadok][i][1] * ulozPivotMenovatel
             if tempMenoval == wTabulka[0][i][1]:
@@ -104,32 +119,45 @@ def GCD(tabulka, pocetRiadkov, pocetStlpcov):
     return tabulka
 def vyberPivota(tabulka, pozZaporneho, pocetRiadkov):
     pocetRiadkov = pocetRiadkov - 1
-    najmensieCislo = 1000
+    najmensieCislo = 10000
+    print(pozZaporneho)
+    print(pocetRiadkov)
     for i in range(0, pocetRiadkov):
-        print("Delenie bazovej hodnoty s vektorovou: " + str(tabulka[i][0]) + " / " +str(tabulka[i][pozZaporneho]) + " a jeho vysledok je: ")
         if ((tabulka[i][0][0] >= 0) and (tabulka[i][pozZaporneho][0] > 0)):
             citatel = tabulka[i][0][0] * tabulka[i][pozZaporneho][1]
             menovatel = tabulka[i][0][1] * tabulka[i][pozZaporneho][0]
             vysledokDocasne = citatel / menovatel
-            print("VYSLEDOK JE: " + str(vysledokDocasne) + "\n")
+            print("♠Delenie bazovej hodnoty s vektorovou:     BAZA " + str(i) + " - " + str(tabulka[i][0]) + " / " + str(
+                tabulka[i][pozZaporneho]) + " a jeho vysledok je: " + str(vysledokDocasne))
             if najmensieCislo > vysledokDocasne:
                 najmensieCislo = vysledokDocasne
                 pozPivota = i
         else:
-            print("☺☺☺☺☺☺☺☺☺☺☺☺Tak to mi ho vyndej ---- NEEXISTUJE MOZNY VYBER PIVOTA")
+            print("♦♦♦♦♦♦♦  Bohuzial sa neda vydelit BAZA " + str(i) + " - " + str(str(tabulka[i][0])) + str(tabulka[i][pozZaporneho]))
     if najmensieCislo >= 0:
         return pozPivota
+    elif najmensieCislo == 10000:
+        return 'totalnyKoniec'
 def vydelPivotom(tabulka, riadokPivota, stlpecPivota):
+    print("♥")
+    print(riadokPivota)
+    print(stlpecPivota)
     pivotCitatel = tabulka[riadokPivota][stlpecPivota][0]
     pivotMenovatel = tabulka[riadokPivota][stlpecPivota][1]
+    print(pivotCitatel)
+    print(pivotMenovatel)
     for j in range(len(tabulka[riadokPivota])):
         tabulka[riadokPivota][j][0] = tabulka[riadokPivota][j][0] * pivotMenovatel
         tabulka[riadokPivota][j][1] = tabulka[riadokPivota][j][1] * pivotCitatel
     return tabulka
 def gaussEliminacnaMetoda(tabulka, pivotRiadok, pivotStlpec, pocetStlpcov):
     for i in range(len(tabulka)):
+        #print("#############################################################\n\n")
         tempPivotCitatel = tabulka[i][pivotStlpec][0]
         tempPivotMenovat = tabulka[i][pivotStlpec][1]
+        """print(tempPivotMenovat)
+        print(tempPivotMenovat)
+        print("CO SOM TO ZAC?")"""
         if pivotRiadok != i:
             if tabulka[i][pivotStlpec][0] != 0:
                 for j in range(0, pocetStlpcov):
@@ -168,70 +196,10 @@ def gaussEliminacnaMetoda(tabulka, pivotRiadok, pivotStlpec, pocetStlpcov):
                         #print("**********")
                     #print("########################################################################")
     return tabulka
-"""
-def gaussMetoda(tabulka, pivotRiadok, pivotStlpec, pocetStlpcov):
-    print(tabulka[0])
-    print(tabulka[1])
-    print(tabulka[2])
-    print(tabulka[3])
-    for i in range(len(tabulka)):
-        pomocnaPivotCitatel = tabulka[i][pivotStlpec][0]
-        pomocnaPivotMenovatel = tabulka[i][pivotStlpec][1]
-        if (i != pivotRiadok):
-            if (tabulka[i][pivotStlpec][0] != 0):
-                for j in range(0, pocetStlpcov):
-                    citatelPivot = tabulka[pivotRiadok][j][0] * tabulka[i][pivotStlpec][0]
-                    menovatelPivot = tabulka[pivotRiadok][j][1] * tabulka[i][pivotStlpec][1]
-                    if tabulka[i][j][1] == menovatelPivot:
-                        print("▼▼▼▼▼▼▼▼▼")
-                        print("PRVA PODMIENKA")
-                        #print(tabulka[i][j][0])
-                        #print(tabulka[i][j][1])
-                        print("▼▼▼▼▼▼▼▼▼\n")
-                        tabulka[i][j][0] = tabulka[i][j][0] - citatelPivot
-                        tabulka[i][j][1] = menovatelPivot
-                    else:
-                        print("☺ vypisujem riadok pre NULU:")
-                        print(tabulka[i][j][0])
-                        print(tabulka[i][j][1])
-                        print(" vypisujem co riadok pivota: ")
-                        print(tabulka[pivotRiadok][j][0])
-                        print(tabulka[pivotRiadok][j][1])
-                        print(" vypisujem nasobenie cisiel: ")
-                        print(str(tabulka[pivotRiadok][j][0]) +" * "+ str(pomocnaPivotCitatel))
-                        print(str(tabulka[pivotRiadok][j][1]) + " * " + str(pomocnaPivotMenovatel))
-                        tempCitatel = tabulka[pivotRiadok][j][0] * pomocnaPivotCitatel
-                        tempMenovatel = tabulka[pivotRiadok][j][1] * pomocnaPivotMenovatel
-                        print("☺ vypisujem vysledok horneho nasobenia:")
-                        print(tempCitatel)
-                        print(tempMenovatel)
-                        if tabulka[i][j][1] == tempMenovatel:
-                            print("menovatel sedel *******************************")
-                            tabulka[i][j][0] = tabulka[i][j][0] - tempCitatel
-                        else:
-                            docasnaMenovatelPrePivota = tabulka[i][j][1]
-                            print(docasnaMenovatelPrePivota)
-                            print("menovatel neseeeeeeeeeeeeedel *******************************")
-                            print(str(tabulka[i][j][0]) + " * " + str(tempMenovatel))
-                            print(str(tabulka[i][j][1]) + " * " + str(tempMenovatel))
-                            tabulka[i][j][0] = tabulka[i][j][0] * tempMenovatel
-                            tabulka[i][j][1] = tabulka[i][j][1] * tempMenovatel
-
-                            print(str(tempCitatel) + " * " + str(docasnaMenovatelPrePivota))
-                            print(str(tempMenovatel) + " * " + str(docasnaMenovatelPrePivota))
-                            tempCitatel = tempCitatel * docasnaMenovatelPrePivota
-                            tempMenovatel = tempMenovatel * docasnaMenovatelPrePivota
-                            tabulka[i][j][0] = tabulka[i][j][0] - tempCitatel
-                            tabulka[i][j][1] = tempMenovatel
-                print("\n")
-                print("\n")
-                print("\n")
-                print("CHODTE DO PHICEEEEEEEEEE")
-    return tabulka
-"""
 def vypisSimplexky(tabulka, wTabulka):
     print("\n ▬▬ VYPIS SIMPLEXKY ▬▬")
-    pocetRiadkov = len(tabulka) - 1
+    pocetRiadkov = (len(tabulka)) - 1
+    print(pocetRiadkov)
     for i in range(len(tabulka)):
         if i == pocetRiadkov:
             print("-----")
@@ -240,4 +208,53 @@ def vypisSimplexky(tabulka, wTabulka):
             print("b = "+str(tabulka[i]))
     print("W = "+str(wTabulka))
     print("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n")
-
+def prehodTabulky(tabulka, pocetStlpcov, pocetU):
+    pocetStlpcov = pocetStlpcov - (pocetU)
+    pocetRiadkov = len(tabulka)
+    #vytvorime pole velkosti minulej len s odrezanymi 'U' pomocnymi
+    for i in range(0, pocetRiadkov):
+        del tabulka[i][pocetStlpcov:]
+        #print(tabulka[i])
+        #print("koniec riadku")
+    return tabulka
+def zistenieZapornejSumy(tabulka):
+    print("KDE NASTALA CHYBA 22222?!")
+    pocetRiadkov = len(tabulka) - 1
+    najmensieCislo = 1000
+    for i in range(1, len(tabulka[0])):
+        pomocna = tabulka[pocetRiadkov][i][0] / tabulka[pocetRiadkov][i][1]
+        if pomocna < najmensieCislo:
+            najmensieCislo = pomocna
+            pozicia = i
+    if pozicia >= 0:
+        return pozicia
+    else:
+        print("NEDA SA DALEJ UPRAVIT!")
+        return 'none'
+def hladajPivota(tabulka, poz):
+    pomocna = 1000
+    pocRiad = len(tabulka)
+    for i in range(len(tabulka)-1):
+        #print("PODMIENKA: " + str(tabulka[i][poz][0]) + " and " + str(tabulka[i][0][0]))
+        if tabulka[i][poz][0] > 0 and tabulka[i][0][0] >= 0:
+            """print("PODMIENKA SPLNENA")
+            print("------: " + str(tabulka[i][0][0]) + " and " + str(tabulka[i][poz][1]))
+            print("------: " + str(tabulka[i][0][1]) + " and " + str(tabulka[i][poz][0]))"""
+            pomocnaCit = tabulka[i][0][0] * tabulka[i][poz][0]
+            pomocnaDel = tabulka[i][0][1] * tabulka[i][poz][1]
+            vysledok = pomocnaCit / pomocnaDel
+            #print(vysledok)
+            if pomocna > vysledok:
+                pozRiadok = i
+        else:
+            print("NESPLNENA PODMIENKA")
+    return pozRiadok
+def vypisDefaultSimplex(tabulka):
+    a = len(tabulka)
+    print(a)
+    for i in range(len(tabulka)):
+        if i == a:
+            print("-----")
+            print("Z = " + str(tabulka[i]))
+        else:
+            print("b = " + str(tabulka[i]))
