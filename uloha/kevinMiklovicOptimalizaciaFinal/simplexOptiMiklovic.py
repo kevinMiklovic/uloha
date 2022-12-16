@@ -1,5 +1,4 @@
 import sys
-
 from maticaNaZlomok import *
 from simplexkaMetody import *
 #################################################################
