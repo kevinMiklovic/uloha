@@ -4,21 +4,21 @@ from maticaNaZlomok import *
 from simplexkaMetody import *
 #################################################################
 ########## ↓☺↓ ZADAJ SI SVOJ PRIKLAD DO TABULIEK ↓☺↓ #########
+"""
 tabulkaStredNazvy = [["b","x1","x2","p1","p2","u1","u2"]]
 tabulkaStred = [[14, 3, 2, 0, 0, 1, 0],
                 [2, 2, -4, -1, 0, 0, 1],
                 [19, 4, 3, 0, 1, 0, 0],
                 [0, 3, 2, 0, 0, 0, 0]]
+"""
 ########## ↑☺↑ ZADAJ SI SVOJ PRIKLAD DO TABULIEK ↑☺↑ #########
 #################################################################
 ########## ↓☺↓ ZADAJ SI SVOJ PRIKLAD DO TABULIEK ↓☺↓ #########
-"""
 tabulkaStredNazvy = [["b","x1","x2","p1","p2"]]
 tabulkaStred = [[14, 3, 2, 0, 0,],
                 [2, 2, -4, -1, 0,],
                 [19, 4, 3, 0, 1,],
-                [0, 3, 2, 0, 0,]]
-"""
+                [0, -2, 2, 0, 0,]]
 ########## ↑☺↑ ZADAJ SI SVOJ PRIKLAD DO TABULIEK ↑☺↑ #########
 #################################################################
 #pre kazdu simplexku si zadefunijeme a pouzijeme podla nutnosti
@@ -86,8 +86,6 @@ if (pocetPomocnych_U > 0):
             vypisDefaultSimplex(tabulkaStredZlomkova)
             while a == '1':
                 a = ukoncenie(tabulkaStredZlomkova, pocetStlpcov, pocetRiadkov)
-                print("hodnota pre 'a' je:")
-                print(a)
                 poz = zistenieZapornejSumy(tabulkaStredZlomkova)
                 if a == '1':
                     print("KONIEC PROGRAMU")
@@ -98,17 +96,26 @@ if (pocetPomocnych_U > 0):
                 tabulkaStredZlomkova = vydelPivotom(tabulkaStredZlomkova, pozPivotaRiadok, poz)
                 tabulkaStredZlomkova = GCD(tabulkaStredZlomkova, pocetRiadkov, pocetStlpcov)
                 tabulkaStredZlomkova = gaussEliminacnaMetoda(tabulkaStredZlomkova, pozPivotaRiadok, poz, pocetStlpcov)
+                tabulkaStredZlomkova = GCD(tabulkaStredZlomkova, pocetRiadkov, pocetStlpcov)
                 vypisDefaultSimplex(tabulkaStredZlomkova)
 elif (pocetPomocnych_U == 0):
     tabulkaStredZlomkova = spravZlomkovu(tabulkaStred)
     vypisDefaultSimplex(tabulkaStredZlomkova)
+    a = '1'
+    while a == '1':
+        a = ukoncenie(tabulkaStredZlomkova, pocetStlpcov, pocetRiadkov)
+        poz = zistenieZapornejSumy(tabulkaStredZlomkova)
+        if a == '1':
+            print("KONIEC PROGRAMU")
+            sys.exit()
+        print("Pozicia zapornej hodnoty je pre hladanie pivota: STLPEC - " + str(poz))
+        pozPivotaRiadok = hladajPivota(tabulkaStredZlomkova, poz)
+        print("\n\n\n")
+        tabulkaStredZlomkova = vydelPivotom(tabulkaStredZlomkova, pozPivotaRiadok, poz)
+        tabulkaStredZlomkova = GCD(tabulkaStredZlomkova, pocetRiadkov, pocetStlpcov)
+        tabulkaStredZlomkova = gaussEliminacnaMetoda(tabulkaStredZlomkova, pozPivotaRiadok, poz, pocetStlpcov)
+        tabulkaStredZlomkova = GCD(tabulkaStredZlomkova, pocetRiadkov, pocetStlpcov)
+        vypisDefaultSimplex(tabulkaStredZlomkova)
 
-#KLASICKA SIMPLEXKA - POCITANIE
-print(" \n\n\n------------- POCITAME KLASICKU SIMPLEXKU! ------------------- \n")
-#zistenieZapornejSumy(tabulkaStredZlomkova)
 
-#TO DO
-# 2 - chceme vynulovat cely stlpec pod aj nad pivotom pomocou gausovej
-# 3 - ak je 'W' tak ho odstranime prec
-# 4 - upravujeme kym neda vysledok a vypiseme
 

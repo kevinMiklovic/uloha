@@ -150,7 +150,6 @@ def vydelPivotom(tabulka, riadokPivota, stlpecPivota):
     return tabulka
 def gaussEliminacnaMetoda(tabulka, pivotRiadok, pivotStlpec, pocetStlpcov):
     for i in range(len(tabulka)):
-        print("#############################################################")
         tempPivotCitatel = tabulka[i][pivotStlpec][0]
         tempPivotMenovat = tabulka[i][pivotStlpec][1]
         """print(tempPivotMenovat)
