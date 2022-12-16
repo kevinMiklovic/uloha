@@ -5,7 +5,7 @@ from simplexkaMetody import *
 #################################################################
 ########## ↓☺↓ ZADAJ SI SVOJ PRIKLAD DO TABULIEK ↓☺↓ #########
 
-tabulkaStredNazvy = [["b","x1","x2","p1","p2","u1","u2"]]
+tabulkaStredNazvy = ["b","x1","x2","p1","p2","u1","u2"]
 tabulkaStred = [[14, 3, 2, 0, 0, 1, 0],
                 [2, 2, -4, -1, 0, 0, 1],
                 [19, 4, 3, 0, 1, 0, 0],
@@ -27,7 +27,7 @@ tabulkaStred = [[14, 3, 2, 0, 0,],
 pocetPomocnych_P = 2
 pocetPomocnych_U = 2    #ak robime zakladnu simplexku tak piseme '0'
 wTabulka = [[0, 0, 0, 0, 0, 0, 0]]
-bazaTabulka = [["nic", "nic", "nic"]]
+bazaTabulka = ["nic", "nic", "nic"]     #nastavujem podla toho kolko mame riadkov
 
 pocetRiadkov = len(tabulkaStred)
 pocetStlpcov = len(tabulkaStred[0])
@@ -60,6 +60,9 @@ if (pocetPomocnych_U > 0):
             #prva hodnota je po deleni bazy..  DRUHA je riadok pivota
             poziciaPivotaRiadok = vyberPivota(tabulkaStredZlomkova, poziciaNajMinusovehoStlpecPivot, pocetRiadkov)
             print("\nNas pivot je: "+str(tabulkaStredZlomkova[poziciaPivotaRiadok][poziciaNajMinusovehoStlpecPivot]) + " a jeho pozicia riadka je: " + str(poziciaPivotaRiadok))
+            print(poziciaPivotaRiadok)
+            print(poziciaNajMinusovehoStlpecPivot)
+            bazaTabulka[poziciaPivotaRiadok] = tabulkaStredNazvy[poziciaNajMinusovehoStlpecPivot+1]
             #vydelenie pivotoveho riadku pivotom
             tabulkaStredZlomkova = vydelPivotom(tabulkaStredZlomkova, poziciaPivotaRiadok, poziciaNajMinusovehoStlpecPivot)
             #GCD - najvacsi delitel
@@ -86,6 +89,10 @@ if (pocetPomocnych_U > 0):
             while a == '1':
                 a = ukoncenie(tabulkaStredZlomkova, pocetStlpcov, pocetRiadkov)
                 if a == '0':
+                    tabulkaStredZlomkova = GCD(tabulkaStredZlomkova, pocetRiadkov, pocetStlpcov)
+                    print()
+                    print(bazaTabulka)
+                    vypisVysledku(tabulkaStredZlomkova)
                     print("\n//////////////////////////////////////////////////////")
                     print("//////////////   KONIEC PROGRAMU   ///////////////////")
                     print("//////////////////////////////////////////////////////")
@@ -94,6 +101,7 @@ if (pocetPomocnych_U > 0):
                 pozPivotaRiadok = hladajPivota(tabulkaStredZlomkova, poz)
                 print("Pozicia pivota: STLPEC - " + str(poz) + "   RIADOK -  " + str(pozPivotaRiadok) + "  hodnota pivota je: "+ str(tabulkaStredZlomkova[pozPivotaRiadok][poz]))
                 print()
+                #bazaTabulka[pozPivotaRiadok] = tabulkaStredNazvy[poz]
                 tabulkaStredZlomkova = vydelPivotom(tabulkaStredZlomkova, pozPivotaRiadok, poz)
                 tabulkaStredZlomkova = GCD(tabulkaStredZlomkova, pocetRiadkov, pocetStlpcov)
                 tabulkaStredZlomkova = gaussEliminacnaMetoda(tabulkaStredZlomkova, pozPivotaRiadok, poz, pocetStlpcov)
@@ -108,14 +116,18 @@ elif (pocetPomocnych_U == 0):
     while a == '1':
         a = ukoncenie(tabulkaStredZlomkova, pocetStlpcov, pocetRiadkov)
         if a == '0':
+            tabulkaStredZlomkova = GCD(tabulkaStredZlomkova, pocetRiadkov, pocetStlpcov)
+            print(bazaTabulka)
             print("\n//////////////////////////////////////////////////////")
             print("//////////////   KONIEC PROGRAMU   ///////////////////")
             print("//////////////////////////////////////////////////////")
             sys.exit()
         poz = zistenieZapornejSumy(tabulkaStredZlomkova)
         pozPivotaRiadok = hladajPivota(tabulkaStredZlomkova, poz)
-        print("\nPozicia zapornej hodnoty je pre hladanie pivota: STLPEC - " + str(poz) + " a jeho hodnota je: " + str(
-            tabulkaStredZlomkova[pocetRiadkov][pozPivotaRiadok]))
+        print("\nPozicia zapornej hodnoty je pre hladanie pivota: STLPEC - " + str(poz) + " a jeho hodnota je: " + str(tabulkaStredZlomkova[pocetRiadkov][pozPivotaRiadok]))
+        print(pozPivotaRiadok)
+        print(poz)
+        bazaTabulka[pozPivotaRiadok] = tabulkaStredNazvy[poz]
         print()
         tabulkaStredZlomkova = vydelPivotom(tabulkaStredZlomkova, pozPivotaRiadok, poz)
         tabulkaStredZlomkova = GCD(tabulkaStredZlomkova, pocetRiadkov, pocetStlpcov)

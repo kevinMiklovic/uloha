@@ -280,3 +280,35 @@ def ukoncenie(tabulka, pocetStlpcov, pocetRiadkov):
         print("SIMPLEXOVA METODA NIE JE FINALNA")
         print(tabulka[pocetRiadkov])
         return '1'
+
+#funkcia pre vysledok
+def vypisVysledku(tabulka):
+    print("SME TAMMMM")
+    """riadok = len()
+    stlpec = tabulka[0]
+    print(riadok)
+    print(stlpec)"""
+    pocRiadok = len(tabulka)
+    pocStlpec = len(tabulka[0])
+    pocRiadok = pocRiadok - 1
+    pocStlpec = pocStlpec - 1
+    poleVysledok = [[]* (pocStlpec - 1)]
+    for i in range(0, 1):
+        a = 0
+        for j in range(1, pocStlpec):
+            for k in range(0, pocRiadok):
+                print(tabulka[k][j][0])
+                print(tabulka[k][j][1])
+                if tabulka[k][j][0] == 1 and tabulka[k][j][1]:
+                    a = a + 1
+                    poz = k
+                elif tabulka[k][j][0] == 0:
+                    a = a + 0
+                else:
+                    a = 'wrong'
+                    pozRiadka = i
+            if a == 1:
+                print()
+
+
+
