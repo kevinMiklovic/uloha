@@ -2,7 +2,6 @@ import sys
 def hladanieNulovehoriadkuW(wTabulka, pocetStlpcov, pocetPomocnychU):
     a = 1
     pocetStlpcov = pocetStlpcov - pocetPomocnychU
-    print(pocetStlpcov)
     for i in range(1, pocetStlpcov):
         if wTabulka[0][i][0] == 0:
             a = a + 1
@@ -10,7 +9,7 @@ def hladanieNulovehoriadkuW(wTabulka, pocetStlpcov, pocetPomocnychU):
         print("CELY VEKTOR JE NULOVY!!!!!!!!!!!!")
         return 'koniec'
     else:
-        print("Vektor je v poriadku - nie je NENULOVY")
+        print("Cenova funkcia sa moze dalej optimalizovat - nie je NENULOVA")
 def vytvorW(tabulkaDefault, wTabulka, pocet_U, pomocnePrePocetRiadkov):
     riadok = 0
     if pocet_U > 0:
@@ -118,8 +117,6 @@ def GCD(tabulka, pocetRiadkov, pocetStlpcov):
 def vyberPivota(tabulka, pozZaporneho, pocetRiadkov):
     pocetRiadkov = pocetRiadkov - 1
     najmensieCislo = 10000
-    print(pozZaporneho)
-    print(pocetRiadkov)
     for i in range(0, pocetRiadkov):
         if ((tabulka[i][0][0] >= 0) and (tabulka[i][pozZaporneho][0] > 0)):
             citatel = tabulka[i][0][0] * tabulka[i][pozZaporneho][1]
@@ -195,7 +192,6 @@ def gaussEliminacnaMetoda(tabulka, pivotRiadok, pivotStlpec, pocetStlpcov):
 def vypisSimplexky(tabulka, wTabulka):
     print("\n ▬▬ VYPIS SIMPLEXKY ▬▬")
     pocetRiadkov = (len(tabulka)) - 1
-    print(pocetRiadkov)
     for i in range(len(tabulka)):
         if i == pocetRiadkov:
             print("-----")
@@ -227,6 +223,7 @@ def zistenieZapornejSumy(tabulka):
         print("☺☺☺☺☺☺")
         print("NEDA SA DALEJ UPRAVIT!")
 def hladajPivota(tabulka, poz):
+    print()
     pomocna = 1000
     pocRiad = len(tabulka)
     for i in range(len(tabulka)-1):
@@ -239,13 +236,17 @@ def hladajPivota(tabulka, poz):
             pomocnaDel = tabulka[i][0][1] * tabulka[i][poz][1]
             vysledok = pomocnaCit / pomocnaDel
             #print(vysledok)
+            print(
+                "♠Delenie bazovej hodnoty s vektorovou:     BAZA " + str(i) + " - " + str(tabulka[i][0]) + " / " + str(
+                    tabulka[i][poz]) + " a jeho vysledok je: " + str(vysledok))
             if pomocna > vysledok:
                 pozRiadok = i
         else:
-            print("NESPLNENA PODMIENKA")
+            print("♦♦♦♦♦♦♦  Bohuzial sa neda vydelit BAZA " + str(i) + " - " + str(str(tabulka[i][0])) + str(tabulka[i][poz]))
+    print()
     return pozRiadok
 def vypisDefaultSimplex(tabulka):
-    print("\n ----- VYPIS SIMPLEXKY -----")
+    print("\n▬▬ VYPIS SIMPLEXKY ▬▬")
     a = len(tabulka)
     for i in range(len(tabulka)):
         if i == (a-1):
@@ -253,6 +254,7 @@ def vypisDefaultSimplex(tabulka):
             print("Z = " + str(tabulka[i]))
         else:
             print("b = " + str(tabulka[i]))
+    print("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n")
 def ukoncenie(tabulka, pocetStlpcov, pocetRiadkov):
     #print("ukonceie")
     pocetRiadkov = pocetRiadkov - 1
@@ -269,9 +271,12 @@ def ukoncenie(tabulka, pocetStlpcov, pocetRiadkov):
             print("mame kladne cislo")
             print(vysledok)
             print()"""
-    print("podmienka: " +str(vysledok) + " == " + str(pocetStlpcov - 1))
+    #print("podmienka: " +str(vysledok) + " == " + str(pocetStlpcov - 1))
     if vysledok == (pocetStlpcov - 1):
         print("SIMPLEXOVA METODA JE FINALNA")
-        return '1'
-    else:
+        print(tabulka[pocetRiadkov])
         return '0'
+    else:
+        print("SIMPLEXOVA METODA NIE JE FINALNA")
+        print(tabulka[pocetRiadkov])
+        return '1'
