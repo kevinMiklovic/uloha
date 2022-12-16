@@ -91,8 +91,9 @@ if (pocetPomocnych_U > 0):
                 if a == '0':
                     tabulkaStredZlomkova = GCD(tabulkaStredZlomkova, pocetRiadkov, pocetStlpcov)
                     print()
-                    print(bazaTabulka)
-                    vypisVysledku(tabulkaStredZlomkova)
+                    print("Všetky neznáme pre cenovu funkciu: "+str(tabulkaStredNazvy))
+                    print("Neznáme v BÁZE: " + str(bazaTabulka))
+                    vypisVysledku(tabulkaStredZlomkova, tabulkaStredNazvy)
                     print("\n//////////////////////////////////////////////////////")
                     print("//////////////   KONIEC PROGRAMU   ///////////////////")
                     print("//////////////////////////////////////////////////////")

@@ -282,33 +282,29 @@ def ukoncenie(tabulka, pocetStlpcov, pocetRiadkov):
         return '1'
 
 #funkcia pre vysledok
-def vypisVysledku(tabulka):
-    print("SME TAMMMM")
-    """riadok = len()
-    stlpec = tabulka[0]
-    print(riadok)
-    print(stlpec)"""
+def vypisVysledku(tabulka, premenneNazvyTabulka):
     pocRiadok = len(tabulka)
     pocStlpec = len(tabulka[0])
     pocRiadok = pocRiadok - 1
-    pocStlpec = pocStlpec - 1
-    poleVysledok = [[]* (pocStlpec - 1)]
     for i in range(0, 1):
-        a = 0
         for j in range(1, pocStlpec):
+            b = 1
+            a = 0
             for k in range(0, pocRiadok):
-                print(tabulka[k][j][0])
-                print(tabulka[k][j][1])
+                poz = j
                 if tabulka[k][j][0] == 1 and tabulka[k][j][1]:
                     a = a + 1
-                    poz = k
+                    pozHodnoty = k
                 elif tabulka[k][j][0] == 0:
                     a = a + 0
                 else:
-                    a = 'wrong'
-                    pozRiadka = i
-            if a == 1:
-                print()
-
+                    b = 0
+            if b == 1 and a == 1:
+                print("BAZA: "+str(premenneNazvyTabulka[poz]) +"    ma hodnotu: "+ str(tabulka[pozHodnoty][0]))
+            else:
+                print("BAZA: "+str(premenneNazvyTabulka[poz]) +"    ma hodnotu:  0")
+    vysledok1 = tabulka[pocRiadok][0][0] * (-1)
+    vysledok2 = tabulka[pocRiadok][0][1]
+    print("Vysledna cenova funkcia 'Z' je: " +str(vysledok1)+"/"+str(vysledok2))
 
 
