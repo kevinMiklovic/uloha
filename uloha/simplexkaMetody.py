@@ -6,7 +6,7 @@ def hladanieNulovehoriadkuW(wTabulka, pocetStlpcov, pocetPomocnychU):
         if wTabulka[0][i][0] == 0:
             a = a + 1
     if a == pocetStlpcov:
-        print("CELY VEKTOR JE NULOVY!!!!!!!!!!!")
+        print("CELY VEKTOR JE NULOVY!!!!!!!!!!")
         return 'koniec'
     else:
         print("Cenova funkcia sa moze dalej optimalizovat - nie je NENULOVA")
