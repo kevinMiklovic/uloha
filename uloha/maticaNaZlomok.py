@@ -16,3 +16,10 @@ def spravZlomok(cislo):
     else:
         vratZlomok = [cislo, 1]
     return vratZlomok
+def funkciaPreBazuPlusVypis(tabulka, pocetStlpcov, pocetRiadkov):
+    pocetRiadkov = pocetRiadkov - 1
+    pocetStlpcov = pocetStlpcov - 1
+    print("pocetRiadkov: " + str(pocetRiadkov) + " ----- pocetSltpcov: " + str(pocetStlpcov))
+    for i in range(tabulka):
+        for j in range(tabulka[0]):
+            print(tabulka[i][j])

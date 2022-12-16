@@ -1,6 +1,4 @@
 import sys
-
-
 def hladanieNulovehoriadkuW(wTabulka, pocetStlpcov, pocetPomocnychU):
     a = 1
     pocetStlpcov = pocetStlpcov - pocetPomocnychU
@@ -139,25 +137,25 @@ def vyberPivota(tabulka, pozZaporneho, pocetRiadkov):
     elif najmensieCislo == 10000:
         return 'totalnyKoniec'
 def vydelPivotom(tabulka, riadokPivota, stlpecPivota):
-    print("♥")
-    print(riadokPivota)
-    print(stlpecPivota)
+    #print("♥")
+    #print(riadokPivota)
+    #print(stlpecPivota)
     pivotCitatel = tabulka[riadokPivota][stlpecPivota][0]
     pivotMenovatel = tabulka[riadokPivota][stlpecPivota][1]
-    print(pivotCitatel)
-    print(pivotMenovatel)
+    #print(pivotCitatel)
+    #print(pivotMenovatel)
     for j in range(len(tabulka[riadokPivota])):
         tabulka[riadokPivota][j][0] = tabulka[riadokPivota][j][0] * pivotMenovatel
         tabulka[riadokPivota][j][1] = tabulka[riadokPivota][j][1] * pivotCitatel
     return tabulka
 def gaussEliminacnaMetoda(tabulka, pivotRiadok, pivotStlpec, pocetStlpcov):
     for i in range(len(tabulka)):
-        #print("#############################################################\n\n")
+        print("#############################################################")
         tempPivotCitatel = tabulka[i][pivotStlpec][0]
         tempPivotMenovat = tabulka[i][pivotStlpec][1]
         """print(tempPivotMenovat)
         print(tempPivotMenovat)
-        print("CO SOM TO ZAC?")"""
+        print("HALOOOO?")"""
         if pivotRiadok != i:
             if tabulka[i][pivotStlpec][0] != 0:
                 for j in range(0, pocetStlpcov):
@@ -172,7 +170,6 @@ def gaussEliminacnaMetoda(tabulka, pivotRiadok, pivotStlpec, pocetStlpcov):
                     print("---")
                     print(tempPivotRiadokCitatel)
                     print(tempPivotRiadokMenovatel)
-                    print("NADOMNOU JE CHYBA")
                     print("//////////")
                     print(tabulka[i][j][0])
                     print(tabulka[i][j][1])"""
@@ -218,7 +215,6 @@ def prehodTabulky(tabulka, pocetStlpcov, pocetU):
         #print("koniec riadku")
     return tabulka
 def zistenieZapornejSumy(tabulka):
-    print("KDE NASTALA CHYBA 22222?!")
     pocetRiadkov = len(tabulka) - 1
     najmensieCislo = 1000
     for i in range(1, len(tabulka[0])):
@@ -229,8 +225,8 @@ def zistenieZapornejSumy(tabulka):
     if pozicia >= 0:
         return pozicia
     else:
+        print("☺☺☺☺☺☺")
         print("NEDA SA DALEJ UPRAVIT!")
-        return 'none'
 def hladajPivota(tabulka, poz):
     pomocna = 1000
     pocRiad = len(tabulka)
@@ -250,11 +246,33 @@ def hladajPivota(tabulka, poz):
             print("NESPLNENA PODMIENKA")
     return pozRiadok
 def vypisDefaultSimplex(tabulka):
+    print("\n ----- VYPIS SIMPLEXKY -----")
     a = len(tabulka)
-    print(a)
     for i in range(len(tabulka)):
-        if i == a:
+        if i == (a-1):
             print("-----")
             print("Z = " + str(tabulka[i]))
         else:
             print("b = " + str(tabulka[i]))
+def ukoncenie(tabulka, pocetStlpcov, pocetRiadkov):
+    #print("ukonceie")
+    pocetRiadkov = pocetRiadkov - 1
+    pocet = tabulka[pocetRiadkov]
+    #print("POCET RIADKOV")
+    #print(pocetRiadkov)
+    vysledok = 0
+    print()
+    for i in range(1, pocetStlpcov):
+        if tabulka[pocetRiadkov][i][0] >= 0:
+            #print(i)
+            vysledok = vysledok + 1
+            """print(tabulka[i][i][0])
+            print("mame kladne cislo")
+            print(vysledok)
+            print()"""
+    print("podmienka: " +str(vysledok) + " == " + str(pocetStlpcov - 1))
+    if vysledok == (pocetStlpcov - 1):
+        print("SIMPLEXOVA METODA JE FINALNA")
+        return '1'
+    else:
+        return '0'

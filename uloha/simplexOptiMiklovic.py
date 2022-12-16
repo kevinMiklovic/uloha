@@ -4,19 +4,28 @@ from maticaNaZlomok import *
 from simplexkaMetody import *
 #################################################################
 ########## ↓☺↓ ZADAJ SI SVOJ PRIKLAD DO TABULIEK ↓☺↓ #########
-pocetPomocnych_P = 2
-pocetPomocnych_U = 2
-
 tabulkaStredNazvy = [["b","x1","x2","p1","p2","u1","u2"]]
 tabulkaStred = [[14, 3, 2, 0, 0, 1, 0],
                 [2, 2, -4, -1, 0, 0, 1],
                 [19, 4, 3, 0, 1, 0, 0],
                 [0, 3, 2, 0, 0, 0, 0]]
-
-wTabulka = [[0, 0, 0, 0, 0, 0, 0]]
-bazaTabulka = [["nic", "nic", "nic"]]
 ########## ↑☺↑ ZADAJ SI SVOJ PRIKLAD DO TABULIEK ↑☺↑ #########
 #################################################################
+########## ↓☺↓ ZADAJ SI SVOJ PRIKLAD DO TABULIEK ↓☺↓ #########
+"""
+tabulkaStredNazvy = [["b","x1","x2","p1","p2"]]
+tabulkaStred = [[14, 3, 2, 0, 0,],
+                [2, 2, -4, -1, 0,],
+                [19, 4, 3, 0, 1,],
+                [0, 3, 2, 0, 0,]]
+"""
+########## ↑☺↑ ZADAJ SI SVOJ PRIKLAD DO TABULIEK ↑☺↑ #########
+#################################################################
+#pre kazdu simplexku si zadefunijeme a pouzijeme podla nutnosti
+pocetPomocnych_P = 2
+pocetPomocnych_U = 0    #ak robime zakladnu simplexku tak piseme '0'
+wTabulka = [[0, 0, 0, 0, 0, 0, 0]]
+bazaTabulka = [["nic", "nic", "nic"]]
 
 pocetRiadkov = len(tabulkaStred)
 pocetStlpcov = len(tabulkaStred[0])
@@ -39,9 +48,6 @@ if (pocetPomocnych_U > 0):
     while vynulovane != 'koniec':
         print(" ------------- POCITAME SIMPLEXKU S POMOCNYMI! ------------------- \n")
         vynulovane = hladanieNulovehoriadkuW(wTabulkaZlomkova, pocetStlpcov, pocetPomocnych_U)
-        print("♥♥♥")
-        print(vynulovane)
-        print("♥♥♥")
         if vynulovane != 'koniec':
             #print(pomocnePolePreVypocetW)
             #print(wTabulkaZlomkova)
@@ -67,26 +73,38 @@ if (pocetPomocnych_U > 0):
             vypisSimplexky(tabulkaStredZlomkova, wTabulkaZlomkova)
             sys.exit()
         elif vynulovane == 'koniec':
-            print("\n\n\nZACIATOK\n\n\n")
-            a = 1
+            print("\n\n\nZACIATOK\n")
+            a = '1'
             print("SKONCILI SME A NASLI NULOVY VEKTOR ---> IDEME NA KLASICKU SIMPLEXKU")
             tabulkaStredZlomkova = prehodTabulky(tabulkaStredZlomkova, pocetStlpcov, pocetPomocnych_U)
-
-            while a == 1:
-                vypisDefaultSimplex(tabulkaStredZlomkova)
+            pocetRiadkov = len(tabulkaStredZlomkova)
+            pocetStlpcov = len(tabulkaStredZlomkova[0])
+            print("pocet stlpov")
+            print(pocetStlpcov)
+            print("pocet riadkov")
+            print(pocetRiadkov)
+            vypisDefaultSimplex(tabulkaStredZlomkova)
+            while a == '1':
+                a = ukoncenie(tabulkaStredZlomkova, pocetStlpcov, pocetRiadkov)
+                print("hodnota pre 'a' je:")
+                print(a)
                 poz = zistenieZapornejSumy(tabulkaStredZlomkova)
+                if a == '1':
+                    print("KONIEC PROGRAMU")
+                    sys.exit()
                 print("Pozicia zapornej hodnoty je pre hladanie pivota: STLPEC - "+str(poz))
                 pozPivotaRiadok = hladajPivota(tabulkaStredZlomkova, poz)
                 print("\n\n\n")
                 tabulkaStredZlomkova = vydelPivotom(tabulkaStredZlomkova, pozPivotaRiadok, poz)
-                print("AHOJ")
-                vypisDefaultSimplex(tabulkaStredZlomkova)
+                tabulkaStredZlomkova = GCD(tabulkaStredZlomkova, pocetRiadkov, pocetStlpcov)
                 tabulkaStredZlomkova = gaussEliminacnaMetoda(tabulkaStredZlomkova, pozPivotaRiadok, poz, pocetStlpcov)
                 vypisDefaultSimplex(tabulkaStredZlomkova)
-                a = 0
+elif (pocetPomocnych_U == 0):
+    tabulkaStredZlomkova = spravZlomkovu(tabulkaStred)
+    vypisDefaultSimplex(tabulkaStredZlomkova)
 
 #KLASICKA SIMPLEXKA - POCITANIE
-print(" ------------- POCITAME KLASICKU SIMPLEXKU! ------------------- \n")
+print(" \n\n\n------------- POCITAME KLASICKU SIMPLEXKU! ------------------- \n")
 #zistenieZapornejSumy(tabulkaStredZlomkova)
 
 #TO DO
